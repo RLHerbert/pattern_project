@@ -1,3 +1,5 @@
+Breakdown of Duties
+
 Dennis - Preparation, find_best_attribute()
 
 Rowan - Dataset parsing, output formatting, other I/O stuff
