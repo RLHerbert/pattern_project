@@ -39,17 +39,19 @@ class DtreeMethods:
                 average_entropy += DtreeMethods.__get_relative_freq(dataset, column, value) * h_attributes_values[value]
             h_t_attributes[Columns(column).name] = average_entropy
 
-        for entropy in h_t_attributes:
-            print(entropy, h_t_attributes[entropy])
+        for attribute in h_t_attributes:
+            print(attribute, h_t_attributes[attribute])
 
         # find attribute with most info gain
         highest_gain = 0
-        current_gain = 0
-        for entropy in h_t_attributes:
-            current_gain = h_t - h_t_attributes[entropy]
-            # not done yet
+        best_attribute = ""
+        for attribute in h_t_attributes:
+            current_gain = h_t - h_t_attributes[attribute]
+            if current_gain > highest_gain:
+                highest_gain = current_gain
+                best_attribute = attribute
 
-        pass
+        return best_attribute
 
     @staticmethod
     def __get_relative_freq(dataset, attribute, value):

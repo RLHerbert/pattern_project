@@ -2,7 +2,7 @@ from DtreeMethods import DtreeMethods
 
 
 # data must be in oder from crust size, shape, filling size and class
-data = [
+pie_data = [
     ["big", "circle", "small", "pos"],
     ["small", "circle", "small", "pos"],
     ["big", "square", "small", "neg"],
@@ -12,4 +12,5 @@ data = [
     ["small", "square", "big", "pos"],
     ["big", "circle", "big", "pos"],
 ]
-DtreeMethods.find_best_attribute(data)
+best_attribute = DtreeMethods.find_best_attribute(pie_data)
+print("best attribute to split on:", best_attribute)
