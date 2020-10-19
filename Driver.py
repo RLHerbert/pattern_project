@@ -47,6 +47,7 @@ class CHESS_COLUMNS(Enum):
     BLACK_KING_RANK = 5
     CLASS = 6
 
+# attributes are in order by the Enum
 chess_data = [
     ["d", "1", "f", "3", "e", "4", "draw"],
     ["a", "1", "f", "3", "g", "3", "draw"],
