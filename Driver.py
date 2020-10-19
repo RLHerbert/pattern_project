@@ -3,21 +3,22 @@ from enum import Enum
 
 
 class PIE_COLUMNS(Enum):
-    CRUST_SIZE = 0
-    SHAPE = 1
-    FILLING_SIZE = 2
-    CLASS = 3
+    ID = 0
+    CRUST_SIZE = 1
+    SHAPE = 2
+    FILLING_SIZE = 3
+    CLASS = 4
 
 # data must be in order from crust size, shape, filling size and class, according to the Enum
 pie_data = [
-    ["big", "circle", "small", "pos"],
-    ["small", "circle", "small", "pos"],
-    ["big", "square", "small", "neg"],
-    ["big", "triangle", "small", "neg"],
-    ["big", "square", "big", "pos"],
-    ["small", "square", "small", "neg"],
-    ["small", "square", "big", "pos"],
-    ["big", "circle", "big", "pos"],
+    ["1", "big", "circle", "small", "pos"],
+    ["2", "small", "circle", "small", "pos"],
+    ["3", "big", "square", "small", "neg"],
+    ["4", "big", "triangle", "small", "neg"],
+    ["5", "big", "square", "big", "pos"],
+    ["6", "small", "square", "small", "neg"],
+    ["7", "small", "square", "big", "pos"],
+    ["8", "big", "circle", "big", "pos"],
 ]
 
 
@@ -39,25 +40,26 @@ print()
 
 
 class CHESS_COLUMNS(Enum):
-    WHITE_KING_FILE = 0
-    WHITE_KING_RANK = 1
-    WHITE_ROOK_FILE = 2
-    WHITE_ROOK_RANK = 3
-    BLACK_KING_FILE = 4
-    BLACK_KING_RANK = 5
-    CLASS = 6
+    ID = 0
+    WHITE_KING_FILE = 1
+    WHITE_KING_RANK = 2
+    WHITE_ROOK_FILE = 3
+    WHITE_ROOK_RANK = 4
+    BLACK_KING_FILE = 5
+    BLACK_KING_RANK = 6
+    CLASS = 7
 
 # attributes are in order by the Enum
 chess_data = [
-    ["d", "1", "f", "3", "e", "4", "draw"],
-    ["a", "1", "f", "3", "g", "3", "draw"],
-    ["c", "2", "d", "6", "a", "1", "one"],
-    ["d", "2", "e", "8", "a", "1", "four"],
-    ["c", "3", "e", "8", "c", "1", "two"],
-    ["c", "3", "d", "4", "e", "1", "eight"],
-    ["d", "3", "a", "8", "f", "3", "nine"],
-    ["d", "3", "e", "2", "b", "1", "four"],
-    ["d", "3", "b", "8", "b", "1", "three"],
+    ["1", "d", "1", "f", "3", "e", "4", "draw"],
+    ["2", "a", "1", "f", "3", "g", "3", "draw"],
+    ["3", "c", "2", "d", "6", "a", "1", "one"],
+    ["4", "d", "2", "e", "8", "a", "1", "four"],
+    ["5", "c", "3", "e", "8", "c", "1", "two"],
+    ["6", "c", "3", "d", "4", "e", "1", "eight"],
+    ["7", "d", "3", "a", "8", "f", "3", "nine"],
+    ["8", "d", "3", "e", "2", "b", "1", "four"],
+    ["9", "d", "3", "b", "8", "b", "1", "three"],
 ]
 
 best_chess_attribute_data = DtreeMethods.find_best_attribute(chess_data)

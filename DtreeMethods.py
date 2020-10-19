@@ -21,7 +21,7 @@ class DtreeMethods:
         collection_of_attribute_value_entropies = {}
 
         # calculate the H(T, attribute)
-        for column in range(0, len(dataset[0]) - 1):
+        for column in range(1, len(dataset[0]) - 1):
             # H(attribute = value) values
             h_attributes_values = {}
 
