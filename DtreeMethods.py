@@ -1,21 +1,24 @@
 import math
-from Columns import Columns
 
 
 class DtreeMethods:
 
     @staticmethod
     def find_best_attribute(dataset):
-        # calc H(T) where T is the dataset
-        p_pos = DtreeMethods.__get_Ppos(dataset, Columns.CLASS.value, "pos")
-        print("pPos of whole set =", p_pos)
-        p_neg = DtreeMethods.__get_Pneg(dataset, Columns.CLASS.value, "neg")
-        print("pNeg of whole set =", p_neg)
-        h_t = DtreeMethods.__calc_entropy(p_pos, p_neg)
-        print("H(T) =", h_t)
+        num_columns = len(dataset[0])
+        list_of_pi = []
+        set_of_classes = set()
+        # get all the possible classes
+        for example in dataset:
+            set_of_classes.add(example[num_columns - 1])
+        for c in set_of_classes:
+            list_of_pi.append(DtreeMethods.__get_pi(dataset, num_columns - 1, c, c))
+
+        h_t = DtreeMethods.__calc_entropy(list_of_pi)
 
         # H(T, attribute) values
         h_t_attributes = {}
+        collection_of_attribute_value_entropies = {}
 
         # calculate the H(T, attribute)
         for column in range(0, len(dataset[0]) - 1):
@@ -28,30 +31,33 @@ class DtreeMethods:
                 possible_values.add(example[column])
             # calculate the H(attribute = value) for each possible value
             for value in possible_values:
-                p_pos = DtreeMethods.__get_Ppos(dataset, column, value)
-                p_neg = DtreeMethods.__get_Pneg(dataset, column, value)
-                entropy = DtreeMethods.__calc_entropy(p_pos, p_neg)
+                list_of_pi = []
+                for c in set_of_classes:
+                    list_of_pi.append(DtreeMethods.__get_pi(dataset, column, value, c))
+                entropy = DtreeMethods.__calc_entropy(list_of_pi)
+
                 h_attributes_values[value] = entropy
+                collection_of_attribute_value_entropies[(column, value)] = entropy
 
             # calculate average entropy
             average_entropy = 0
             for value in possible_values:
                 average_entropy += DtreeMethods.__get_relative_freq(dataset, column, value) * h_attributes_values[value]
-            h_t_attributes[Columns(column).name] = average_entropy
-
-        for attribute in h_t_attributes:
-            print(attribute, h_t_attributes[attribute])
+            h_t_attributes[column] = average_entropy
 
         # find attribute with most info gain
         highest_gain = 0
         best_attribute = ""
+        attribute_info_gains = {}
         for attribute in h_t_attributes:
             current_gain = h_t - h_t_attributes[attribute]
+            attribute_info_gains[attribute] = current_gain
             if current_gain > highest_gain:
                 highest_gain = current_gain
                 best_attribute = attribute
 
-        return best_attribute
+        # returns selected attribute, attribute value entropies, attribute entropies, and attribute info gains
+        return best_attribute, collection_of_attribute_value_entropies, h_t_attributes, attribute_info_gains
 
     @staticmethod
     def __get_relative_freq(dataset, attribute, value):
@@ -67,16 +73,21 @@ class DtreeMethods:
         return num_examples_with_value / num_total_examples
 
     @staticmethod
-    def __calc_entropy(p_pos, p_neg):
-        if p_pos == 0 or p_neg == 0:
-            return 0
-        return -p_pos * math.log2(p_pos) - p_neg * math.log2(p_neg)
+    def __calc_entropy(list_of_pi):
+        entropy = 0
+        for pi in list_of_pi:
+            if pi == 0:
+                entropy += 0
+            else:
+                entropy += -pi * math.log2(pi)
+        return entropy
 
     @staticmethod
-    def __get_Ppos(dataset, attribute, value):
+    def __get_pi(dataset, attribute, value, label):
         num_examples_with_value = 0
-        num_pos_examples_with_value = 0
+        num_examples_with_value_with_label = 0
         num_total_examples = 0
+        num_columns = len(dataset[0])
 
         # find number of examples with the value of a given attribute
         for example in dataset:
@@ -84,40 +95,13 @@ class DtreeMethods:
             if example[attribute] == value:
                 num_examples_with_value += 1
 
-                # check to see if it is positive
-                if example[Columns.CLASS.value] == "pos":
-                    num_pos_examples_with_value += 1
+                if example[num_columns - 1] == label:
+                    num_examples_with_value_with_label += 1
 
         if num_examples_with_value == 0:
             return 0
 
-        if attribute == Columns.CLASS.value:
+        if attribute == num_columns - 1:
             return num_examples_with_value / num_total_examples
 
-        return num_pos_examples_with_value / num_examples_with_value
-
-
-
-    @staticmethod
-    def __get_Pneg(dataset, attribute, value):
-        num_examples_with_value = 0
-        num_neg_examples_with_value = 0
-        num_total_examples = 0
-
-        # find number of examples with the value of a given attribute
-        for example in dataset:
-            num_total_examples += 1
-            if example[attribute] == value:
-                num_examples_with_value += 1
-
-                # check to see if it is positive
-                if example[Columns.CLASS.value] == "neg":
-                    num_neg_examples_with_value += 1
-
-        if num_examples_with_value == 0:
-            return 0
-
-        if attribute == Columns.CLASS.value:
-            return num_examples_with_value / num_total_examples
-
-        return num_neg_examples_with_value / num_examples_with_value
+        return num_examples_with_value_with_label / num_examples_with_value
