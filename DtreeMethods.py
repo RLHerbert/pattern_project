@@ -56,6 +56,9 @@ class DtreeMethods:
                 highest_gain = current_gain
                 best_attribute = attribute
 
+        # case of no best attribute to split on. this means we will have a leaf
+        if best_attribute == "":
+            best_attribute = -1
         # returns selected attribute, attribute value entropies, attribute entropies, and attribute info gains
         return best_attribute, collection_of_attribute_value_entropies, h_t_attributes, attribute_info_gains
 

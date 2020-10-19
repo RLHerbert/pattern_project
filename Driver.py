@@ -3,6 +3,7 @@ from enum import Enum
 
 
 class PIE_COLUMNS(Enum):
+    NO_ATTRIBUTE = -1
     ID = 0
     CRUST_SIZE = 1
     SHAPE = 2
@@ -40,6 +41,7 @@ print()
 
 
 class CHESS_COLUMNS(Enum):
+    NO_ATTRIBUTE = -1
     ID = 0
     WHITE_KING_FILE = 1
     WHITE_KING_RANK = 2
