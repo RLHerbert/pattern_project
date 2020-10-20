@@ -121,7 +121,7 @@ class DtreeMethods:
         #create question node 
         q_node = questionNode(attribute)
         # divide dataset into subsets i.e shape, fillling size 
-        list_of_subsets = DtreeMethods.__divide_set_by_attribute(attribute, dataset)
+        list_of_subsets = divide_set_by_attribute(attribute, dataset)
 
         for subset in list_of_subsets: 
             if DtreeMethods.__is_same_class(subset):
