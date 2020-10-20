@@ -105,3 +105,84 @@ class DtreeMethods:
             return num_examples_with_value / num_total_examples
 
         return num_examples_with_value_with_label / num_examples_with_value
+
+
+
+
+    """
+    Build the Decision Tree. 
+    """
+    def build_tree(dataset): 
+        list_of_subsets = []
+        # find the best attribute for current data subset
+        # column number
+        attribute = find_best_attribute(dataset)
+        
+        #create question node 
+        q_node = questionNode(attribute)
+        # divide dataset into subsets i.e shape, fillling size 
+        list_of_subsets = DtreeMethods.__divide_set_by_attribute(attribute, dataset)
+
+        for subset in list_of_subsets: 
+            if DtreeMethods.__is_same_class(subset):
+                q_node.addChild(leafNode(new_class))         
+            else: 
+                q_node.addChild(build_tree(subset))
+
+        return q_node
+
+
+
+
+    # divide the data set by the given attribute
+    # i.e attribute is shape --- return 3 subsets ! 
+    # attribute is the column number 
+    def divide_set_by_attribute(attribute, dataset):
+        list_of_subset = []
+        # list of unqiue values in the given attribute:
+        unique_values = DtreeMethods.__get_unique_values_for_attribute(attribute, dataset)
+        for value in unique_values:         
+            subset=[]
+            # for each vector in dataset  
+            for example in dataset:          
+                # print("example: ", example) 
+                if example[attribute] == value : 
+                    subset.append(example)
+                   
+            # list_of_subset.append((value, subset))
+            list_of_subset.append(subset)
+      
+        return list_of_subset
+
+
+
+    # return true if all vectors in the subset have the same class
+    @staticmethod
+    def __is_same_class(subset):
+        num_columns = len(subset[0])
+        this_class = subset[0][num_columns - 1]
+        for i in range(1, len(subset)):
+            if subset[i][num_columns - 1] == this_class:
+                same_class = True
+            else:
+                return False
+        return True
+            
+            
+    # return subsets of each attribute 
+    # shape: return cirlce, square, triangle   
+    @staticmethod
+    def __get_unique_values_for_attribute(attribute, dataset):
+        subset = []
+        for example in dataset: 
+            # print(example)
+            # print('attribute: ', example[attribute])
+            if not subset: 
+                subset.append(example[attribute])
+            if example[attribute] not in subset: 
+                subset.append(example[attribute])
+        # print(subset)
+        return subset
+
+
+

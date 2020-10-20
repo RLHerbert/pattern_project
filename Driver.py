@@ -77,3 +77,10 @@ print("chess domain attribute information gains:")
 for attribute in best_chess_attribute_data[3]:
     print(CHESS_COLUMNS(attribute).name, best_chess_attribute_data[3][attribute])
 print()
+
+
+
+# test divide_set_by_attribute
+list_of_subset = DtreeMethods.divide_set_by_attribute(1, chess_data)
+for subset in list_of_subset: 
+    print("subset by : " ,subset)
