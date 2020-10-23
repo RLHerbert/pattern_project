@@ -1,0 +1,12 @@
+Breakdown of Duties
+
+Dennis - Preparation/planning, find_best_attribute()
+
+Rowan - Dataset parsing/boosting, output formatting, other I/O stuff
+
+Sophanna - buildTree, divide_set_by_attribute()
+
+Melissa - questionNode and leafNode classes, getClassification()
+
+
+Unassigned To Dos - weighting/voting of DTrees
