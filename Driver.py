@@ -84,3 +84,6 @@ print()
 list_of_subset = DtreeMethods.divide_set_by_attribute(1, chess_data)
 for subset in list_of_subset: 
     print("subset by : " ,subset)
+
+
+

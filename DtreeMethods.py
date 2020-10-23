@@ -125,10 +125,11 @@ class DtreeMethods:
 
         for subset in list_of_subsets: 
             if DtreeMethods.__is_same_class(subset):
+                # add new leafNode
+                new_class = DtreeMethods.__get_class(subset[0])
                 q_node.addChild(leafNode(new_class))         
             else: 
                 q_node.addChild(build_tree(subset))
-
         return q_node
 
 
@@ -162,10 +163,8 @@ class DtreeMethods:
         num_columns = len(subset[0])
         this_class = subset[0][num_columns - 1]
         for i in range(1, len(subset)):
-            if subset[i][num_columns - 1] == this_class:
-                same_class = True
-            else:
-                return False
+            if subset[i][num_columns - 1] != this_class:
+               return False           
         return True
             
             
@@ -184,5 +183,8 @@ class DtreeMethods:
         # print(subset)
         return subset
 
+    # return the class of each vector 
+    def __get_class(data):
+        return data[7]
 
 
