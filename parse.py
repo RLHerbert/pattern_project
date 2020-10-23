@@ -8,7 +8,7 @@ def data_to_array(row=[]):
 
 def enumerate_data(enumerated=[]):
     temp = enumerated[1]
-    temp.insert(0, enumerated[0])
+    temp.insert(0, str(enumerated[0]))
     return temp
 
 
