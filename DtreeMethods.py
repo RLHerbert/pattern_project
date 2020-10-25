@@ -132,10 +132,21 @@ class DtreeMethods:
         print()
 
 
+    @staticmethod
+    def getClassification(node, example):
+        if node is type leafNode:
+            return node.getClassification()
+        else node is type questionNode:
+            attribute = node.getAttribute()
+            value = example[attribute]
+
+        getClassification(node.getChild(value), example)
+
 
     """
     Build the Decision Tree. 
     """
+
     # return best_attribute, collection_of_attribute_value_entropies, h_t_attributes, attribute_info_gains
     def build_tree(dataset): 
         list_of_subsets = []
