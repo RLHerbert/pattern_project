@@ -9,17 +9,17 @@ class leafNode:
 	def getClassification():
 		return self.classification
 
-
 class questionNode:
 	"""questionNode description"""
 
 	def __init__(self, attribute):
 		self.attribute = attribute
+		self.children = {}
 
-	def addChild(childNode, value):
+	def addChild(self,childNode, value):
 		self.children[value] = childNode
 
-	def getChild(value):
+	def getChild(self, value):
 		return self.children[value]
 
 	def getAttribute():
