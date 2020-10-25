@@ -1,13 +1,13 @@
 class leafNode:
 	"""leafNode description"""
 
-	def __init__(self, classification):
-		self.classification = classification
+	def __init__(self, label):
+		self.label = label
 		self.attribute = ""
 		self.children = {}
 
-	def getClassification():
-		return self.classification
+	def getLabel():
+		return self.label
 
 class questionNode:
 	"""questionNode description"""
