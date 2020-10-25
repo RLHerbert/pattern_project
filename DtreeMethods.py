@@ -142,7 +142,6 @@ class DtreeMethods:
             getClassification(node.getChild(value), example)
 
 
-
     """
     Build the Decision Tree. 
     """
