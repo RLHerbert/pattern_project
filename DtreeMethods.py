@@ -131,6 +131,16 @@ class DtreeMethods:
             print(COLUMNS(attribute).name, best_attribute_data[3][attribute])
         print()
 
+    @staticmethod
+    def getClassification(node, example):
+        if node is type leafNode:
+            return node.getClassification()
+        else node is type questionNode:
+            attribute = node.getAttribute()
+            value = example[attribute]
+
+        getClassification(node.getChild(value), example)
+
 
 
     """
