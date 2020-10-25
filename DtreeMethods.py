@@ -134,9 +134,9 @@ class DtreeMethods:
 
     @staticmethod
     def getClassification(node, example):
-        if node is type leafNode:
+        if node is type(leafNode):
             return node.getClassification()
-        else node is type questionNode:
+        else node is type(questionNode):
             attribute = node.getAttribute()
             value = example[attribute]
 
