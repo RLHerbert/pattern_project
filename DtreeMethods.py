@@ -146,14 +146,14 @@ class DtreeMethods:
         q_node = questionNode(best_attribute[0])
         # divide dataset into subsets i.e shape, fillling size 
         list_of_subsets = DtreeMethods.divide_set_by_attribute(best_attribute[0], dataset)
-
+        print("attriubte ",best_attribute[0] )
         for subset in list_of_subsets: 
             if DtreeMethods.__is_same_class(subset[1]):
                 # add new leafNode
                 new_class = DtreeMethods.__get_class(subset[1][0])
                 child_node = leafNode(new_class) 
                 # add the class with its subset 
-                print("subset[1] ", subset[1])
+               
                 q_node.addChild(subset[1], child_node.classification)       
                 print("adding child  node: ", child_node.classification)
                 print("its children are: ", q_node.getChild(child_node.classification))
@@ -301,7 +301,7 @@ def main():
         # to test need to change this method to public 
         # print("class for this subset: ", DtreeMethods.get_class(subset[1][0]))
     # test build tree
-    question_node = DtreeMethods.build_tree(chess_data)
+    question_node = DtreeMethods.build_tree(pie_data)
     
 
 if __name__ == "__main__":
