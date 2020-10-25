@@ -131,6 +131,7 @@ class DtreeMethods:
             print(COLUMNS(attribute).name, best_attribute_data[3][attribute])
         print()
 
+
     @staticmethod
     def getClassification(node, example):
         if node is type leafNode:
