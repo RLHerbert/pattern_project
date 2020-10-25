@@ -2,9 +2,9 @@
 
 ## CECS 550-01 | Project 1 - DTrees Ensemble
 
-**Team**: Classy Fires
+**Team Name**: Classy Fires
 
-**Team** Members: Sophanna Ek, Melissa Hazlewood Rowan Herbert, Dennis La
+**Team Members** Members: Sophanna Ek, Melissa Hazlewood Rowan Herbert, Dennis La
 
 Introduction: [TODO]
 
