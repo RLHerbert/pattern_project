@@ -133,22 +133,24 @@ class DtreeMethods:
     """
     Build the Decision Tree. 
     """
+    # return best_attribute, collection_of_attribute_value_entropies, h_t_attributes, attribute_info_gains
     def build_tree(dataset): 
         list_of_subsets = []
         # find the best attribute for current data subset
         # column number
-        attribute = find_best_attribute(dataset)
+        best_attribute = find_best_attribute(dataset)
         
-        #create question node 
-        q_node = questionNode(attribute)
+        #create question node using the best attribute 
+        q_node = questionNode(best_attribute[0])
         # divide dataset into subsets i.e shape, fillling size 
-        list_of_subsets = divide_set_by_attribute(attribute, dataset)
+        list_of_subsets = divide_set_by_attribute(best_attribute[0], dataset)
 
         for subset in list_of_subsets: 
-            if DtreeMethods.__is_same_class(subset):
+            if DtreeMethods.__is_same_class(subset[1]):
                 # add new leafNode
-                new_class = DtreeMethods.__get_class(subset[0])
-                q_node.addChild(leafNode(new_class))         
+                new_class = DtreeMethods.__get_class(subset[1][0])
+                # add the class with its subset 
+                q_node.addChild(leafNode(new_class), subset[1])         
             else: 
                 q_node.addChild(build_tree(subset))
         return q_node
@@ -156,7 +158,7 @@ class DtreeMethods:
 
     # divide the data set by the given attribute
     # i.e attribute is shape --- return 3 subsets ! 
-    # attribute is the column number 
+    # return list of tuple (square, list_of_square_subset)...
     def divide_set_by_attribute(attribute, dataset):
         list_of_subset = []
         # list of unqiue values in the given attribute:
@@ -169,8 +171,8 @@ class DtreeMethods:
                 if example[attribute] == value : 
                     subset.append(example)
                    
-            # list_of_subset.append((value, subset))
-            list_of_subset.append(subset)
+            list_of_subset.append((value, subset))
+            
       
         return list_of_subset
 
@@ -203,8 +205,10 @@ class DtreeMethods:
         return subset
 
     # return the class of each vector 
+    @staticmethod
     def __get_class(data):
-        return data[7]
+        num_columns = len(data)
+        return data[num_columns - 1]
 
 
 def main():
@@ -287,7 +291,10 @@ def main():
     # test divide_set_by_attribute
     list_of_subset = DtreeMethods.divide_set_by_attribute(1, chess_data)
     for subset in list_of_subset: 
-        print("subset by : " ,subset)
+        print("subset by : " ,subset[0], subset[1])
+        # to test need to change this method to public 
+        # print("class for this subset: ", DtreeMethods.get_class(subset[1][0]))
+    
 
 if __name__ == "__main__":
     main()
