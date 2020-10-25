@@ -1,5 +1,8 @@
+from DtreeNodes import leafNode
+from DtreeNodes import questionNode
 import math
 from enum import Enum
+
 
 
 class DtreeMethods:
@@ -137,22 +140,25 @@ class DtreeMethods:
     def build_tree(dataset): 
         list_of_subsets = []
         # find the best attribute for current data subset
-        # column number
-        best_attribute = find_best_attribute(dataset)
+        best_attribute = DtreeMethods.find_best_attribute(dataset)
         
         #create question node using the best attribute 
         q_node = questionNode(best_attribute[0])
         # divide dataset into subsets i.e shape, fillling size 
-        list_of_subsets = divide_set_by_attribute(best_attribute[0], dataset)
+        list_of_subsets = DtreeMethods.divide_set_by_attribute(best_attribute[0], dataset)
 
         for subset in list_of_subsets: 
             if DtreeMethods.__is_same_class(subset[1]):
                 # add new leafNode
                 new_class = DtreeMethods.__get_class(subset[1][0])
+                child_node = leafNode(new_class) 
                 # add the class with its subset 
-                q_node.addChild(leafNode(new_class), subset[1])         
+                print("subset[1] ", subset[1])
+                q_node.addChild(subset[1], child_node.classification)       
+                print("adding child  node: ", child_node.classification)
+                print("its children are: ", q_node.getChild(child_node.classification))
             else: 
-                q_node.addChild(build_tree(subset))
+                DtreeMethods.build_tree(subset[1])
         return q_node
 
 
@@ -294,6 +300,8 @@ def main():
         print("subset by : " ,subset[0], subset[1])
         # to test need to change this method to public 
         # print("class for this subset: ", DtreeMethods.get_class(subset[1][0]))
+    # test build tree
+    question_node = DtreeMethods.build_tree(chess_data)
     
 
 if __name__ == "__main__":
