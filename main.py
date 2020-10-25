@@ -1,2 +1,8 @@
-#!/usr/bin/python3
-print("idk")
+# Entry point?
+
+def main():
+    print('TODO')
+
+
+if __name__ == "__main__":
+    main()
