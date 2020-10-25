@@ -139,8 +139,7 @@ class DtreeMethods:
         elif node is type(questionNode):
             attribute = node.getAttribute()
             value = example[attribute]
-
-        getClassification(node.getChild(value), example)
+            getClassification(node.getChild(value), example)
 
 
 
