@@ -23,6 +23,9 @@ class questionNode:
 	def getChild(self, value):
 		return self.children[value]
 
+	def getChildren(self):
+		return self.children
+
 	def getAttribute(self):
 		return self.attribute
 

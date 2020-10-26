@@ -41,7 +41,7 @@ class Dtree:
             #print the q node data
             print("***************************QUESTION NODE ATTRIBUTE DATA***************************")
             node.print_attribute_data(self.__columns_enum)
-            for value in node.children:
+            for value in node.getChildren():
                 self.__output_q_node_data(node.getChild(value))
 
 
