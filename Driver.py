@@ -46,24 +46,12 @@ pie_data = [
     ]
 
 
+# build the dtree
 pie_dtree = DtreeMethods.build_tree(pie_data)
 
-# shape_q_circle_child = pie_dtree.getChild("circle")
-# shape_q_square_child = pie_dtree.getChild("square")
-# shape_q_triangle_child = pie_dtree.getChild("triangle")
-#
-# print(type(shape_q_circle_child), shape_q_circle_child.getLabel())
-# print(type(shape_q_square_child))
-# print(type(shape_q_triangle_child), shape_q_triangle_child.getLabel())
-#
-# filling_q_big_child = shape_q_square_child.getChild("big")
-# filling_q_small_child = shape_q_square_child.getChild("small")
-#
-# print(type(filling_q_big_child), filling_q_big_child.getLabel())
-# print(type(filling_q_small_child), filling_q_small_child.getLabel())
+# test example. should be negative
+example1 = ["6", "small", "square", "small", "???"]
 
+# classify the test example
+print("classifcation from dtree is:", DtreeMethods.getClassification(pie_dtree, example1))
 
-example1 = ["6", "small", "square", "small", "neg"]
-
-label = DtreeMethods.getClassification(pie_dtree, example1)
-print("trying to print out label:", label)

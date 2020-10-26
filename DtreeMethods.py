@@ -135,13 +135,11 @@ class DtreeMethods:
     @staticmethod
     def getClassification(node, example):
         if isinstance(node, leafNode):
-            print("got to leaf node, label found:", node.getLabel())
             return node.getLabel()
         elif isinstance(node, questionNode):
-            print("got to question node, attribute of question node column index:", node.getAttribute())
             attribute = node.getAttribute()
             value = example[attribute]
-            DtreeMethods.getClassification(node.getChild(value), example)
+            return DtreeMethods.getClassification(node.getChild(value), example)
 
 
     """
