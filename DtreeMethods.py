@@ -133,20 +133,20 @@ class DtreeMethods:
         print()
 
 
-    @staticmethod
-    def getClassification(node, example, possible_labels):
-        if isinstance(node, leafNode):
-            return node.getLabel()
-        elif isinstance(node, questionNode):
-            attribute = node.getAttribute()
-            value = example[attribute]
-            # need to check for missing edge
-            if value in node.children:
-                return DtreeMethods.getClassification(node.getChild(value), example, possible_labels)
-            else:
-                # we have a missing edge, need to give a random class
-                random_index = random.randint(0, len(possible_labels) - 1)
-                return possible_labels[random_index]
+    # @staticmethod
+    # def getClassification(node, example, possible_labels):
+    #     if isinstance(node, leafNode):
+    #         return node.getLabel()
+    #     elif isinstance(node, questionNode):
+    #         attribute = node.getAttribute()
+    #         value = example[attribute]
+    #         # need to check for missing edge
+    #         if value in node.children:
+    #             return DtreeMethods.getClassification(node.getChild(value), example, possible_labels)
+    #         else:
+    #             # we have a missing edge, need to give a random class
+    #             random_index = random.randint(0, len(possible_labels) - 1)
+    #             return possible_labels[random_index]
 
     @staticmethod
     def get_possible_labels_from_data(dataset):
