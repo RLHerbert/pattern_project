@@ -1,5 +1,5 @@
-from DtreeMethods import DtreeMethods
 from enum import Enum
+from Dtree import Dtree
 import parse
 
 
@@ -21,14 +21,15 @@ split_data = parse.run()
 #     print(training_example)
 
 # make the chess dtree
-chess_dtree = DtreeMethods.build_tree(split_data["train"])
+chess_dtree = Dtree(split_data["train"], CHESS_COLUMNS)
+# chess_dtree.output_q_node_data()
 # test example, this is the first example from csv file. class should be draw
 chess_example1 = ['1', 'd', '1', 'f', '3', 'e', '4', '???']
 # this other example should be class 'five'
 chess_example112 = ['112', 'd', '3', 'c', '4', 'c', '1', '???']
 # get the classifications
-print("classification of example 1 from chess dtree is:", DtreeMethods.getClassification(chess_dtree, chess_example1))
-print("classification of example 122 from chess dtree is:", DtreeMethods.getClassification(chess_dtree, chess_example112))
+print("classification of example 1 from chess dtree is:", chess_dtree.getClassification(chess_example1))
+print("classification of example 122 from chess dtree is:", chess_dtree.getClassification(chess_example112))
 
 
 # PIE TEST*****************************************:
@@ -54,10 +55,11 @@ pie_data = [
 
 
 # build the dtree
-pie_dtree = DtreeMethods.build_tree(pie_data)
+pie_dtree = Dtree(pie_data, PIE_COLUMNS)
+pie_dtree.output_q_node_data()
 
 # test example. should be negative
 example1 = ["6", "small", "square", "small", "???"]
 
 # classify the test example
-# print("classification from pie dtree is:", DtreeMethods.getClassification(pie_dtree, example1))
+print("classification from pie dtree is:", pie_dtree.getClassification(example1))
