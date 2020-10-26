@@ -15,10 +15,10 @@ class Dtree:
         return self.__getClassification(self.__root, example)
 
     def output_q_node_data(self):
-        return self.__output_q_node_data(self.__root)
+        return self.__output_q_node_data(self.__root, None, None)
 
     def output_leaf_node_data(self):
-        return self.__output_leaf_node_data(self.__root)
+        return self.__output_leaf_node_data(self.__root, None, None)
 
     def output_parents(self):
         return self.__output_parents(self.__root, None, None)
@@ -43,24 +43,34 @@ class Dtree:
                 random_index = random.randint(0, len(self.__list_possible_labels) - 1)
                 return self.__list_possible_labels[random_index]
 
-    def __output_q_node_data(self, node):
+    def __output_q_node_data(self, node, parent, value):
         if isinstance(node, leafNode):
             return
         elif isinstance(node, questionNode):
             #print the q node data
             print("***************************QUESTION NODE ATTRIBUTE DATA***************************")
+            if parent is not None:
+                print("Question node's attribute:", self.__columns_enum(node.getAttribute()).name)
+                print("Question node's parent:", self.__columns_enum(parent.attribute).name)
+                print("Question node's value:", value)
+            else:
+                print("Question node's attribute:", self.__columns_enum(node.getAttribute()).name)
+                print("This question node is the root.")
+            print("Entropy data for question node:")
             node.print_attribute_data(self.__columns_enum)
             for value in node.getChildren():
-                self.__output_q_node_data(node.getChild(value))
+                self.__output_q_node_data(node.getChild(value), node, value)
 
-    def __output_leaf_node_data(self, node):
+    def __output_leaf_node_data(self, node, parent, value):
         if isinstance(node, leafNode):
             print("*****************************LEAF NODE ATTRIBUTE DATA*****************************")
-            print("Leaf node label:", node.getLabel())
+            print("Leaf node's parent:", self.__columns_enum(parent.attribute).name)
+            print("Leaf node's value:", value)
+            print("Leaf node's label:", node.getLabel())
             return
         elif isinstance(node, questionNode):
             for value in node.getChildren():
-                self.__output_leaf_node_data(node.getChild(value))
+                self.__output_leaf_node_data(node.getChild(value), node, value)
 
     def __output_everything(self, node, parent, value):
         if isinstance(node, leafNode):
