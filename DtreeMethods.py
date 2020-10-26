@@ -1,6 +1,7 @@
 from DtreeNodes import leafNode
 from DtreeNodes import questionNode
 import math
+import random
 from enum import Enum
 
 
@@ -133,13 +134,27 @@ class DtreeMethods:
 
 
     @staticmethod
-    def getClassification(node, example):
+    def getClassification(node, example, possible_labels):
         if isinstance(node, leafNode):
             return node.getLabel()
         elif isinstance(node, questionNode):
             attribute = node.getAttribute()
             value = example[attribute]
-            return DtreeMethods.getClassification(node.getChild(value), example)
+            # need to check for missing edge
+            if value in node.children:
+                return DtreeMethods.getClassification(node.getChild(value), example, possible_labels)
+            else:
+                # we have a missing edge, need to give a random class
+                random_index = random.randint(0, len(possible_labels) - 1)
+                return possible_labels[random_index]
+
+    @staticmethod
+    def get_possible_labels_from_data(dataset):
+        set_of_possible_classes = set()
+        num_columns = len(dataset[0])
+        for example in dataset:
+            set_of_possible_classes.add(example[num_columns - 1])
+        return list(set_of_possible_classes)
 
 
     """
