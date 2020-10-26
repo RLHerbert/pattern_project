@@ -6,7 +6,7 @@ class leafNode:
 		self.attribute = ""
 		self.children = {}
 
-	def getLabel():
+	def getLabel(self):
 		return self.label
 
 class questionNode:
@@ -16,11 +16,11 @@ class questionNode:
 		self.attribute = attribute
 		self.children = {}
 
-	def addChild(self,childNode, value):
+	def addChild(self, value, childNode):
 		self.children[value] = childNode
 
 	def getChild(self, value):
 		return self.children[value]
 
-	def getAttribute():
+	def getAttribute(self):
 		return self.attribute
