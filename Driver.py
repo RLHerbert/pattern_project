@@ -60,10 +60,10 @@ pie_data = [
 
 # build the dtree
 pie_dtree = DtreeMethods.build_tree(pie_data)
-
+possible_labels = ["pos", "neg"]
 
 # test example. should be negative
 example1 = ["6", "small", "square", "small", "???"]
 
 # classify the test example
-# print("classification from pie dtree is:", DtreeMethods.getClassification(pie_dtree, example1))
+print("classification from pie dtree is:", DtreeMethods.getClassification(pie_dtree, example1, possible_labels))
