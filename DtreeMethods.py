@@ -134,18 +134,21 @@ class DtreeMethods:
 
     @staticmethod
     def getClassification(node, example):
-        if node is type(leafNode):
-            return node.getClassification()
-        elif node is type(questionNode):
+        if isinstance(node, leafNode):
+            print("got to leaf node, label found:", node.getLabel())
+            return node.getLabel()
+        elif isinstance(node, questionNode):
+            print("got to question node, attribute of question node column index:", node.getAttribute())
             attribute = node.getAttribute()
             value = example[attribute]
-            getClassification(node.getChild(value), example)
+            DtreeMethods.getClassification(node.getChild(value), example)
 
 
     """
     Build the Decision Tree. 
     """
     # return best_attribute, collection_of_attribute_value_entropies, h_t_attributes, attribute_info_gains
+    @staticmethod
     def build_tree(dataset): 
         list_of_subsets = []
         # find the best attribute for current data subset
@@ -160,20 +163,21 @@ class DtreeMethods:
             if DtreeMethods.__is_same_class(subset[1]):
                 # add new leafNode
                 new_class = DtreeMethods.__get_class(subset[1][0])
-                child_node = leafNode(new_class) 
+                child_node = leafNode(new_class)
                 # add the class with its subset 
-                print("subset[1] ", subset[1])
-                q_node.addChild(subset[1], child_node.classification)       
-                print("adding child  node: ", child_node.classification)
-                print("its children are: ", q_node.getChild(child_node.classification))
-            else: 
-                DtreeMethods.build_tree(subset[1])
+                # print("subset[1] ", subset[1])
+                q_node.addChild(subset[0], child_node)
+                #print("adding child  node: ", child_node.label)
+                #print("its children are: ", q_node.getChild(child_node.label))
+            else:
+                q_node.addChild(subset[0], DtreeMethods.build_tree(subset[1]))
         return q_node
 
 
     # divide the data set by the given attribute
     # i.e attribute is shape --- return 3 subsets ! 
     # return list of tuple (square, list_of_square_subset)...
+    @staticmethod
     def divide_set_by_attribute(attribute, dataset):
         list_of_subset = []
         # list of unqiue values in the given attribute:
