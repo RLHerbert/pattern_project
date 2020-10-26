@@ -5,16 +5,17 @@ import random
 
 
 class Dtree:
-    def __init__(self, dataset):
+    def __init__(self, dataset, columns_enum):
         self.__root = self.__build_tree(dataset)
+        self.__columns_enum = columns_enum
         self.__list_possible_labels = self.__get_possible_labels_from_data(dataset)
 
     # wrapper method
     def getClassification(self, example):
         return self.__getClassification(self.__root, example)
 
-    def output_q_node_data(self, columns_enum):
-        return self.__output_q_node_data(self.__root, columns_enum)
+    def output_q_node_data(self):
+        return self.__output_q_node_data(self.__root)
 
     # THE REST OF THE STUFF BELOW ARE PRIVATE METHODS****************
 
@@ -33,15 +34,15 @@ class Dtree:
                 random_index = random.randint(0, len(self.__list_possible_labels) - 1)
                 return self.__list_possible_labels[random_index]
 
-    def __output_q_node_data(self, node, columns_enum):
+    def __output_q_node_data(self, node):
         if isinstance(node, leafNode):
             return
         elif isinstance(node, questionNode):
             #print the q node data
             print("***************************QUESTION NODE ATTRIBUTE DATA***************************")
-            node.print_attribute_data(columns_enum)
+            node.print_attribute_data(self.__columns_enum)
             for value in node.children:
-                self.__output_q_node_data(node.getChild(value), columns_enum)
+                self.__output_q_node_data(node.getChild(value))
 
 
 

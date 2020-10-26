@@ -21,8 +21,8 @@ split_data = parse.run()
 #     print(training_example)
 
 # make the chess dtree
-chess_dtree = Dtree(split_data["train"])
-# chess_dtree.output_q_node_data(CHESS_COLUMNS)
+chess_dtree = Dtree(split_data["train"], CHESS_COLUMNS)
+# chess_dtree.output_q_node_data()
 # test example, this is the first example from csv file. class should be draw
 chess_example1 = ['1', 'd', '1', 'f', '3', 'e', '4', '???']
 # this other example should be class 'five'
@@ -55,7 +55,8 @@ pie_data = [
 
 
 # build the dtree
-pie_dtree = Dtree(pie_data)
+pie_dtree = Dtree(pie_data, PIE_COLUMNS)
+pie_dtree.output_q_node_data()
 
 # test example. should be negative
 example1 = ["6", "small", "square", "small", "???"]
