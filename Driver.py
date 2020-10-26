@@ -14,14 +14,21 @@ class CHESS_COLUMNS(Enum):
     BLACK_KING_RANK = 6
     CLASS = 7
 
+# CHESS TEST*****************************************:
 # parsing data into training set, holdout and validation
-# split_data = parse.run()
+split_data = parse.run()
 # for training_example in split_data["train"]:
 #     print(training_example)
-#
-# finding best attribute to split on and other data about entropies
-# best_chess_attribute_data = DtreeMethods.find_best_attribute(split_data["train"])
-# DtreeMethods.print_attribute_data(best_chess_attribute_data, CHESS_COLUMNS)
+
+# make the chess dtree
+chess_dtree = DtreeMethods.build_tree(split_data["train"])
+# test example, this is the first example from csv file. class should be draw
+chess_example1 = ['1', 'd', '1', 'f', '3', 'e', '4', '???']
+# this other example should be class 'five'
+chess_example112 = ['112', 'd', '3', 'c', '4', 'c', '1', '???']
+# get the classifications
+print("classification of example 1 from chess dtree is:", DtreeMethods.getClassification(chess_dtree, chess_example1))
+print("classification of example 122 from chess dtree is:", DtreeMethods.getClassification(chess_dtree, chess_example112))
 
 
 # PIE TEST*****************************************:
@@ -53,5 +60,4 @@ pie_dtree = DtreeMethods.build_tree(pie_data)
 example1 = ["6", "small", "square", "small", "???"]
 
 # classify the test example
-print("classifcation from dtree is:", DtreeMethods.getClassification(pie_dtree, example1))
-
+# print("classification from pie dtree is:", DtreeMethods.getClassification(pie_dtree, example1))
