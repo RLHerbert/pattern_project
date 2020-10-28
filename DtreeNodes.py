@@ -30,8 +30,7 @@ class questionNode:
 		return self.attribute
 
 	def print_attribute_data(self, columns_enum):
-		print("Best attribute to split on:", columns_enum(self.best_attribute_data[0]).name, "Column:",
-			  self.best_attribute_data[0], "\n")
+		print("Best attribute to split on:", columns_enum(self.best_attribute_data[0]).name, "\n")
 		print("Attribute value entropies:")
 		for attribute_value_tuple in self.best_attribute_data[1]:
 			print(columns_enum(attribute_value_tuple[0]).name, attribute_value_tuple[1],

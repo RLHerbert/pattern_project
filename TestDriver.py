@@ -64,7 +64,7 @@ pie_dtree = Dtree(pie_data, PIE_COLUMNS)
 # pie_dtree.output_q_node_data()
 # pie_dtree.output_leaf_node_data()
 # pie_dtree.output_parents()
-# pie_dtree.output_everything()
+pie_dtree.output_everything()
 
 
 # test example. should be negative
