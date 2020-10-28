@@ -43,7 +43,7 @@ def main():
     print("Accuracy of Dtree 1 on holdout set:", accuracy_of_dtree_1_on_holdt)
     print("Accuracy of Dtree 2 on holdout set:", accuracy_of_dtree_2_on_holdt)
 
-
+    # TODO MAYBE DETERMINE BETTER WAY TO DO VOTING WEIGHTS?
     # setting the voting weights as the accuracies for now
     dtree_1.set_voting_weight(accuracy_of_dtree_1_on_holdt)
     dtree_2.set_voting_weight(accuracy_of_dtree_2_on_holdt)
