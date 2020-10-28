@@ -9,6 +9,8 @@ class Dtree:
         self.__root = self.__build_tree(dataset)
         self.__columns_enum = columns_enum
         self.__list_possible_labels = self.__get_possible_labels_from_data(dataset)
+        # set default voting weight
+        self.__voting_weight = 1
 
     # wrapper method
     def getClassification(self, example):
@@ -29,9 +31,18 @@ class Dtree:
     def get_accuracy(self, dataset):
         correct = 0
         for example in dataset:
-            if (example[len(dataset[0]) - 1] == self.getClassification(example)):
+            if example[len(dataset[0]) - 1] == self.getClassification(example):
                 correct += 1
         return correct / len(dataset)
+
+    def get_voting_weight(self):
+        return self.__voting_weight
+
+    def set_voting_weight(self, weight):
+        self.__voting_weight = weight
+
+    def get_enum(self):
+        return self.__columns_enum
 
     # THE REST OF THE STUFF BELOW ARE PRIVATE METHODS****************
 

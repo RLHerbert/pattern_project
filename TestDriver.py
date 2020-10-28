@@ -22,7 +22,7 @@ split_data = parse.run()
 
 # make the chess dtree
 chess_dtree = Dtree(split_data["train"], CHESS_COLUMNS)
-# print("Accuracy =", chess_dtree.get_accuracy(split_data["holdt"]))
+print("Accuracy =", chess_dtree.get_accuracy(split_data["holdt"]))
 
 # chess_dtree.output_q_node_data()
 # chess_dtree.output_leaf_node_data()
@@ -64,11 +64,11 @@ pie_dtree = Dtree(pie_data, PIE_COLUMNS)
 # pie_dtree.output_q_node_data()
 # pie_dtree.output_leaf_node_data()
 # pie_dtree.output_parents()
-pie_dtree.output_everything()
+# pie_dtree.output_everything()
 
 
 # test example. should be negative
 example1 = ["6", "small", "square", "small", "???"]
 
 # classify the test example
-print("classification from pie dtree is:", pie_dtree.getClassification(example1))
+# print("classification from pie dtree is:", pie_dtree.getClassification(example1))
