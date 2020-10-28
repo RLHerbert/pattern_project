@@ -26,6 +26,13 @@ class Dtree:
     def output_everything(self):
         return self.__output_everything(self.__root, None, None)
 
+    def get_accuracy(self, dataset):
+        correct = 0
+        for example in dataset:
+            if (example[len(dataset[0]) - 1] == self.getClassification(example)):
+                correct += 1
+        return correct / len(dataset)
+
     # THE REST OF THE STUFF BELOW ARE PRIVATE METHODS****************
 
     # recursive method for finding classification
@@ -297,3 +304,4 @@ class Dtree:
     def __get_class(self, data):
         num_columns = len(data)
         return data[num_columns - 1]
+

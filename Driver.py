@@ -22,6 +22,8 @@ split_data = parse.run()
 
 # make the chess dtree
 chess_dtree = Dtree(split_data["train"], CHESS_COLUMNS)
+# print("Accuracy =", chess_dtree.get_accuracy(split_data["holdt"]))
+
 # chess_dtree.output_q_node_data()
 # chess_dtree.output_leaf_node_data()
 # chess_dtree.output_parents()
