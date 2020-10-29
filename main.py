@@ -30,9 +30,9 @@ def main():
 
     # create the second tree
     dtree_2 = from_misclassified(tree_data_dictionary, dtree_1)
-    print("**************************************START OF DTREE 2 DETAILS**************************************")
+    print("********************************START OF DTREE 2 CONSTRUCTION DETAILS********************************")
     dtree_2.output_parents()
-    print("***************************************END OF DTREE 2 DETAILS***************************************")
+    print("*********************************END OF DTREE 2 CONSTRUCTION DETAILS*********************************")
     
     print()
     # TODO PRINT MISCLASSIFIED HOLDOUT VECTORS
@@ -40,16 +40,16 @@ def main():
     # printing accuracies based on hold out set
     accuracy_of_dtree_1_on_holdt = dtree_1.get_accuracy(tree_data_dictionary["holdt"])
     accuracy_of_dtree_2_on_holdt = dtree_2.get_accuracy(tree_data_dictionary["holdt"])
-    print("Accuracy of Dtree 1 on holdout set:", accuracy_of_dtree_1_on_holdt)
-    print("Accuracy of Dtree 2 on holdout set:", accuracy_of_dtree_2_on_holdt)
+    print("Error rate of Dtree 1 on holdout set:", (1 - accuracy_of_dtree_1_on_holdt) * 100, "%")
+    print("Error rate of Dtree 2 on holdout set:", (1 - accuracy_of_dtree_2_on_holdt) * 100, "%")
 
-    # TODO MAYBE DETERMINE BETTER WAY TO DO VOTING WEIGHTS?
+    # TODO MAYBE DETERMINE BETTER WAY TO DO VOTING WEIGHTS? idk... He just says "voting weights based on accuracies"
     # setting the voting weights as the accuracies for now
     dtree_1.set_voting_weight(accuracy_of_dtree_1_on_holdt)
     dtree_2.set_voting_weight(accuracy_of_dtree_2_on_holdt)
     print()
-    print("Voting weight of Dtree 1:", dtree_1.get_voting_weight())
-    print("Voting weight of Dtree 2:", dtree_2.get_voting_weight())
+    print("Voting weight of Dtree 1 (based on accuracy):", dtree_1.get_voting_weight())
+    print("Voting weight of Dtree 2 (based on accuracy):", dtree_2.get_voting_weight())
 
     # create the ensemble
     dtree_ensemble = DtreeEnsemble()
@@ -61,9 +61,9 @@ def main():
     accuracy_of_dtree_1_on_valid = dtree_1.get_accuracy(tree_data_dictionary["valid"])
     accuracy_of_dtree_2_on_valid = dtree_2.get_accuracy(tree_data_dictionary["valid"])
     accuracy_of_ensemble_on_valid = dtree_ensemble.get_accuracy(tree_data_dictionary["valid"])
-    print("Accuracy of Ensemble on validation set:", accuracy_of_ensemble_on_valid)
-    print("Accuracy of Dtree 1 on validation set:", accuracy_of_dtree_1_on_valid)
-    print("Accuracy of Dtree 2 on validation set:", accuracy_of_dtree_2_on_valid)
+    print("Accuracy rate of Ensemble on validation set:", accuracy_of_ensemble_on_valid * 100, "%")
+    print("Accuracy rate of Dtree 1 on validation set:", accuracy_of_dtree_1_on_valid * 100, "%")
+    print("Accuracy rate of Dtree 2 on validation set:", accuracy_of_dtree_2_on_valid * 100, "%")
 
 
 if __name__ == "__main__":
