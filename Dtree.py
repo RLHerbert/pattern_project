@@ -14,28 +14,48 @@ import random
 
 
 class Dtree:
+    """
+    Dtree constructor, takes in a dataset and an enum that identifies the columns of the dataset
+    """
     def __init__(self, dataset, columns_enum):
         self.__root = self.__build_tree(dataset)
         self.__columns_enum = columns_enum
         # set default voting weight
         self.__voting_weight = 1
 
-    # wrapper method
+    """
+    Returns the label of a given example
+    """
     def get_classification(self, example):
         return self.__get_classification(self.__root, example)
 
+    """
+    Outputs the question node data
+    """
     def output_q_node_data(self):
         return self.__output_q_node_data(self.__root, None, None)
 
+    """
+    Outputs the leaf node data
+    """
     def output_leaf_node_data(self):
         return self.__output_leaf_node_data(self.__root, None, None)
 
+    """
+    Outputs the parents of each node
+    """
     def output_parents(self):
         return self.__output_parents(self.__root, None, None)
 
+    """
+    Outputs all data for each node
+    """
     def output_everything(self):
         return self.__output_everything(self.__root, None, None)
 
+    """
+    Returns accuracy of the dtree on a given dataset
+    """
     def get_accuracy(self, dataset):
         correct = 0
         for example in dataset:
@@ -43,18 +63,29 @@ class Dtree:
                 correct += 1
         return correct / len(dataset)
 
+    """
+    Returns the voting weight of the dtree
+    """
     def get_voting_weight(self):
         return self.__voting_weight
 
+    """
+    Sets the voting weight of the dtree
+    """
     def set_voting_weight(self, weight):
         self.__voting_weight = weight
 
+    """
+    Returns the enum that identifies the columns of the dataset
+    """
     def get_enum(self):
         return self.__columns_enum
 
-    # THE REST OF THE STUFF BELOW ARE PRIVATE METHODS****************
+    # ****************THE REST OF THE STUFF BELOW ARE PRIVATE METHODS****************
 
-    # recursive method for finding classification
+    """
+    Recursive method for finding classification given an example
+    """
     def __get_classification(self, node, example):
         if isinstance(node, leafNode):
             return node.getLabel()
@@ -67,7 +98,9 @@ class Dtree:
             else:
                 # we have a missing edge, give the most common label that reached the node
                 return node.most_common_label_from_dataset
-
+    """
+    Recursive method for printing question node data
+    """
     def __output_q_node_data(self, node, parent, value):
         if isinstance(node, leafNode):
             return
@@ -82,7 +115,9 @@ class Dtree:
             node.print_attribute_data(self.__columns_enum)
             for value in node.getChildren():
                 self.__output_q_node_data(node.getChild(value), node, value)
-
+    """
+    Recursive method for printing leaf node data
+    """
     def __output_leaf_node_data(self, node, parent, value):
         if isinstance(node, leafNode):
             print("*****************************LEAF NODE ATTRIBUTE DATA*****************************")
@@ -91,7 +126,9 @@ class Dtree:
         elif isinstance(node, questionNode):
             for value in node.getChildren():
                 self.__output_leaf_node_data(node.getChild(value), node, value)
-
+    """
+    Recursive method for printing all data for each node
+    """
     def __output_everything(self, node, parent, value):
         if isinstance(node, leafNode):
             print("*****************************LEAF NODE ATTRIBUTE DATA*****************************")
@@ -107,7 +144,9 @@ class Dtree:
             node.print_attribute_data(self.__columns_enum)
             for value in node.getChildren():
                 self.__output_everything(node.getChild(value), node, value)
-
+    """
+    Recursive method for printing parent data for each node
+    """
     def __output_parents(self, node, parent, value):
         if isinstance(node, leafNode):
             print("*****************************LEAF NODE*****************************")
@@ -122,20 +161,31 @@ class Dtree:
             for value in node.getChildren():
                 self.__output_parents(node.getChild(value), node, value)
 
+    """
+    Helper function to print the roots data
+    """
     def __print_root_message(self, node):
         print("Question node's attribute:", self.__columns_enum(node.getAttribute()).name)
         print("This question node is the root.")
-
+    """
+    Helper function to print the question node data
+    """
     def __print_q_message(self, node, parent, value):
         print("Question node's attribute:", self.__columns_enum(node.getAttribute()).name)
         print("Question node's parent attribute:", self.__columns_enum(parent.attribute).name)
         print("Question node's parent value:", value)
-
+    """
+    Helper function to print the leaf node data
+    """
     def __print_leaf_message(self, node, parent, value):
         print("Leaf node's parent attribute:", self.__columns_enum(parent.attribute).name)
         print("Leaf node's parent value:", value)
         print("Leaf node's label:", node.getLabel())
-
+    """
+    Function to find the best attribute to split on.
+    Also finds the attribute value entropies, attribute entropies, and attribute info gains.
+    Returns all of the above
+    """
     def __find_best_attribute(self, dataset):
         num_columns = len(dataset[0])
         list_of_pi = []
@@ -194,6 +244,10 @@ class Dtree:
         # returns selected attribute, attribute value entropies, attribute entropies, and attribute info gains
         return best_attribute, collection_of_attribute_value_entropies, h_t_attributes, attribute_info_gains
 
+    """
+    Helper function to get the relative frequency of examples with a given attribute's value out of
+    all examples from a given dataset
+    """
     def __get_relative_freq(self, dataset, attribute, value):
         num_total_examples = 0
         num_examples_with_value = 0
@@ -206,6 +260,9 @@ class Dtree:
             return 0
         return num_examples_with_value / num_total_examples
 
+    """
+    Function to calculate the entropy given a list of probabilities for each label
+    """
     def __calc_entropy(self, list_of_pi):
         entropy = 0
         for pi in list_of_pi:
@@ -215,6 +272,10 @@ class Dtree:
                 entropy += -pi * math.log2(pi)
         return entropy
 
+    """
+    Function that calculates relative frequency of examples with a given label from a given data set
+    Used for calculating the entropy
+    """
     def __get_pi(self, dataset, attribute, value, label):
         num_examples_with_value = 0
         num_examples_with_value_with_label = 0
@@ -233,16 +294,16 @@ class Dtree:
         if num_examples_with_value == 0:
             return 0
 
+        # if the attribute in question is the class label itself
         if attribute == num_columns - 1:
             return num_examples_with_value / num_total_examples
 
+        # if the attribute in question is NOT the class label itself
         return num_examples_with_value_with_label / num_examples_with_value
 
     """
-        Build the Decision Tree. 
+    Function to build the Decision Tree. 
     """
-
-    # return best_attribute, collection_of_attribute_value_entropies, h_t_attributes, attribute_info_gains
     def __build_tree(self, dataset):
         list_of_subsets = []
         # find the best attribute for current data subset
@@ -260,17 +321,21 @@ class Dtree:
                 new_class = self.__get_class(subset[1][0])
                 child_node = leafNode(new_class)
                 # add the class with its subset
-                # print("subset[1] ", subset[1])
                 q_node.addChild(subset[0], child_node)
-                # print("adding child  node: ", child_node.label)
-                # print("its children are: ", q_node.getChild(child_node.label))
+
             else:
                 q_node.addChild(subset[0], self.__build_tree(subset[1]))
         return q_node
 
-    # divide the data set by the given attribute
-    # i.e attribute is shape --- return 3 subsets !
-    # return list of tuple (square, list_of_square_subset)...
+
+    """
+    Function that divides a given dataset in subsets that correspond to each of the
+    attribute's values.
+    Example:
+    divide the data set by the given attribute
+    i.e attribute is shape --- return 3 subsets !
+    return list of tuple (square, list_of_square_subset)...
+    """
     def __divide_set_by_attribute(self, attribute, dataset):
         list_of_subset = []
         # list of unqiue values in the given attribute:
@@ -279,7 +344,6 @@ class Dtree:
             subset = []
             # for each vector in dataset
             for example in dataset:
-                # print("example: ", example)
                 if example[attribute] == value:
                     subset.append(example)
 
@@ -287,7 +351,9 @@ class Dtree:
 
         return list_of_subset
 
-    # return true if all vectors in the subset have the same class
+    """
+    Function that returns true if all vectors in the subset have the same class
+    """
     def __is_same_class(self, subset):
         num_columns = len(subset[0])
         this_class = subset[0][num_columns - 1]
@@ -296,6 +362,35 @@ class Dtree:
                 return False
         return True
 
+    """
+    Function to return the unique values for a given attribute in a given dataset
+    Example:
+    return subsets of each attribute
+    shape: return cirlce, square, triangle
+    """
+    def __get_unique_values_for_attribute(self, attribute, dataset):
+        subset = []
+        for example in dataset:
+            # print(example)
+            # print('attribute: ', example[attribute])
+            if not subset:
+                subset.append(example[attribute])
+            if example[attribute] not in subset:
+                subset.append(example[attribute])
+        # print(subset)
+        return subset
+
+    """
+    Function that returns the class of each vector
+    """
+    def __get_class(self, data):
+        num_columns = len(data)
+        return data[num_columns - 1]
+
+    """
+    Function that returns the most common label seen in a given dataset
+    Used for handling the case of a missing edge in the tree
+    """
     def __get_most_common_label(self, dataset):
         label_dict = {}
         num_columns = len(dataset[0])
@@ -312,23 +407,3 @@ class Dtree:
                 most_common_label = label
 
         return most_common_label
-
-    # return subsets of each attribute
-    # shape: return cirlce, square, triangle
-    def __get_unique_values_for_attribute(self, attribute, dataset):
-        subset = []
-        for example in dataset:
-            # print(example)
-            # print('attribute: ', example[attribute])
-            if not subset:
-                subset.append(example[attribute])
-            if example[attribute] not in subset:
-                subset.append(example[attribute])
-        # print(subset)
-        return subset
-
-    # return the class of each vector
-    def __get_class(self, data):
-        num_columns = len(data)
-        return data[num_columns - 1]
-
