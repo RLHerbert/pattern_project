@@ -1,3 +1,12 @@
+"""
+DtreeNodes.py - Class that encapsulates the leaf and question nodes and
+proves functions to operate on them
+
+Dennis La - Dennis.La@student.csulb.edu
+Melissa Hazlewood - Melissa.Hazlewood@student.csulb.edu
+Rowan Herbert - Rowan.Herbert@student.csulb.edu
+Sophanna Ek - Sophanna.Ek@student.csulb.edu
+"""
 class leafNode:
 	"""leafNode description"""
 

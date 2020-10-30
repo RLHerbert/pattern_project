@@ -1,3 +1,12 @@
+"""
+second_tree.py - Class that returns the information about the second dtree
+Namely returns the second dtree, its training set, and the misclassified holdouts of dtree1
+
+Dennis La - Dennis.La@student.csulb.edu
+Melissa Hazlewood - Melissa.Hazlewood@student.csulb.edu
+Rowan Herbert - Rowan.Herbert@student.csulb.edu
+Sophanna Ek - Sophanna.Ek@student.csulb.edu
+"""
 from Dtree import Dtree
 from enum import Enum
 import parse

@@ -1,3 +1,12 @@
+"""
+main.py - The entry point of the project. prints out all the output
+for the project
+
+Dennis La - Dennis.La@student.csulb.edu
+Melissa Hazlewood - Melissa.Hazlewood@student.csulb.edu
+Rowan Herbert - Rowan.Herbert@student.csulb.edu
+Sophanna Ek - Sophanna.Ek@student.csulb.edu
+"""
 from Dtree import Dtree
 from Ensemble import DtreeEnsemble
 from enum import Enum

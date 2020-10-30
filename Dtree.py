@@ -1,3 +1,12 @@
+"""
+Dtree.py - Class that encapsulates all functions needed to create a Dtree.
+Provides a constructor for creating a Dtree and functions to operate on the Dtree.
+
+Dennis La - Dennis.La@student.csulb.edu
+Melissa Hazlewood - Melissa.Hazlewood@student.csulb.edu
+Rowan Herbert - Rowan.Herbert@student.csulb.edu
+Sophanna Ek - Sophanna.Ek@student.csulb.edu
+"""
 import math
 from DtreeNodes import leafNode
 from DtreeNodes import questionNode

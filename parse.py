@@ -1,3 +1,12 @@
+"""
+parse.py - Class that parses the data from the csv file
+Returns the data in 3 sections: the training set, holdout set and validation set
+
+Dennis La - Dennis.La@student.csulb.edu
+Melissa Hazlewood - Melissa.Hazlewood@student.csulb.edu
+Rowan Herbert - Rowan.Herbert@student.csulb.edu
+Sophanna Ek - Sophanna.Ek@student.csulb.edu
+"""
 import csv
 import random
 
