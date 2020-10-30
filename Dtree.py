@@ -88,13 +88,13 @@ class Dtree:
     """
     def __get_classification(self, node, example):
         if isinstance(node, leafNode):
-            return node.getLabel()
+            return node.get_label()
         elif isinstance(node, questionNode):
-            attribute = node.getAttribute()
+            attribute = node.get_attribute()
             value = example[attribute]
             # need to check for missing edge
-            if value in node.children:
-                return self.__get_classification(node.getChild(value), example)
+            if value in node.get_children():
+                return self.__get_classification(node.get_child(value), example)
             else:
                 # we have a missing edge, give the most common label that reached the node
                 return node.most_common_label_from_dataset
@@ -113,8 +113,8 @@ class Dtree:
                 self.__print_root_message(node)
             print("Entropy data for question node:")
             node.print_attribute_data(self.__columns_enum)
-            for value in node.getChildren():
-                self.__output_q_node_data(node.getChild(value), node, value)
+            for value in node.get_children():
+                self.__output_q_node_data(node.get_child(value), node, value)
     """
     Recursive method for printing leaf node data
     """
@@ -124,8 +124,8 @@ class Dtree:
             self.__print_leaf_message(node, parent, value)
             return
         elif isinstance(node, questionNode):
-            for value in node.getChildren():
-                self.__output_leaf_node_data(node.getChild(value), node, value)
+            for value in node.get_children():
+                self.__output_leaf_node_data(node.get_child(value), node, value)
     """
     Recursive method for printing all data for each node
     """
@@ -142,8 +142,8 @@ class Dtree:
                 self.__print_root_message(node)
             print("Entropy data for question node:")
             node.print_attribute_data(self.__columns_enum)
-            for value in node.getChildren():
-                self.__output_everything(node.getChild(value), node, value)
+            for value in node.get_children():
+                self.__output_everything(node.get_child(value), node, value)
     """
     Recursive method for printing parent data for each node
     """
@@ -158,29 +158,29 @@ class Dtree:
                 self.__print_q_message(node, parent, value)
             else:
                 self.__print_root_message(node)
-            for value in node.getChildren():
-                self.__output_parents(node.getChild(value), node, value)
+            for value in node.get_children():
+                self.__output_parents(node.get_child(value), node, value)
 
     """
     Helper function to print the roots data
     """
     def __print_root_message(self, node):
-        print("Question node's attribute:", self.__columns_enum(node.getAttribute()).name)
+        print("Question node's attribute:", self.__columns_enum(node.get_attribute()).name)
         print("This question node is the root.")
     """
     Helper function to print the question node data
     """
     def __print_q_message(self, node, parent, value):
-        print("Question node's attribute:", self.__columns_enum(node.getAttribute()).name)
-        print("Question node's parent attribute:", self.__columns_enum(parent.attribute).name)
+        print("Question node's attribute:", self.__columns_enum(node.get_attribute()).name)
+        print("Question node's parent attribute:", self.__columns_enum(parent.get_attribute()).name)
         print("Question node's parent value:", value)
     """
     Helper function to print the leaf node data
     """
     def __print_leaf_message(self, node, parent, value):
-        print("Leaf node's parent attribute:", self.__columns_enum(parent.attribute).name)
+        print("Leaf node's parent attribute:", self.__columns_enum(parent.get_attribute()).name)
         print("Leaf node's parent value:", value)
-        print("Leaf node's label:", node.getLabel())
+        print("Leaf node's label:", node.get_label())
     """
     Function to find the best attribute to split on.
     Also finds the attribute value entropies, attribute entropies, and attribute info gains.
@@ -321,10 +321,10 @@ class Dtree:
                 new_class = self.__get_class(subset[1][0])
                 child_node = leafNode(new_class)
                 # add the class with its subset
-                q_node.addChild(subset[0], child_node)
+                q_node.add_child(subset[0], child_node)
 
             else:
-                q_node.addChild(subset[0], self.__build_tree(subset[1]))
+                q_node.add_child(subset[0], self.__build_tree(subset[1]))
         return q_node
 
 

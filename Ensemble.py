@@ -88,11 +88,11 @@ def main():
 
     print()
     print("classification of example 1 from dtree1 is:", dtree1.get_classification(chess_example1))
-    #print("classification of example 122 from dtree1 is:", dtree1.getClassification(chess_example112))
+    #print("classification of example 122 from dtree1 is:", dtree1.get_classification(chess_example112))
 
     print()
     print("classification of example 1 from dtree2 is:", dtree2.get_classification(chess_example1))
-    #print("classification of example 122 from dtree2 is:", dtree2.getClassification(chess_example112))
+    #print("classification of example 122 from dtree2 is:", dtree2.get_classification(chess_example112))
 
     print()
     print("classification of example 1 from ensemble is:", dtree_ensemble.get_voting_results(chess_example1))

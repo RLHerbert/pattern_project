@@ -71,4 +71,4 @@ pie_dtree.output_everything()
 example1 = ["6", "small", "square", "small", "???"]
 
 # classify the test example
-# print("classification from pie dtree is:", pie_dtree.getClassification(example1))
+print("classification from pie dtree is:", pie_dtree.get_classification(example1))
