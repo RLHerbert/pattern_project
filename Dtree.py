@@ -21,8 +21,8 @@ class Dtree:
         self.__voting_weight = 1
 
     # wrapper method
-    def getClassification(self, example):
-        return self.__getClassification(self.__root, example)
+    def get_classification(self, example):
+        return self.__get_classification(self.__root, example)
 
     def output_q_node_data(self):
         return self.__output_q_node_data(self.__root, None, None)
@@ -39,7 +39,7 @@ class Dtree:
     def get_accuracy(self, dataset):
         correct = 0
         for example in dataset:
-            if example[len(dataset[0]) - 1] == self.getClassification(example):
+            if example[len(dataset[0]) - 1] == self.get_classification(example):
                 correct += 1
         return correct / len(dataset)
 
@@ -55,7 +55,7 @@ class Dtree:
     # THE REST OF THE STUFF BELOW ARE PRIVATE METHODS****************
 
     # recursive method for finding classification
-    def __getClassification(self, node, example):
+    def __get_classification(self, node, example):
         if isinstance(node, leafNode):
             return node.getLabel()
         elif isinstance(node, questionNode):
@@ -63,7 +63,7 @@ class Dtree:
             value = example[attribute]
             # need to check for missing edge
             if value in node.children:
-                return self.__getClassification(node.getChild(value), example)
+                return self.__get_classification(node.getChild(value), example)
             else:
                 # we have a missing edge, give the most common label that reached the node
                 return node.most_common_label_from_dataset

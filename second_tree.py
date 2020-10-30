@@ -17,7 +17,7 @@ def from_misclassified(tree_dict, dtree):
     boost_list = tree_dict["train"] + tree_dict["holdt"]
     num_columns = len(boost_list[0])
     for h in tree_dict["holdt"]:
-        if (dtree.getClassification(h) != h[num_columns - 1]):
+        if (dtree.get_classification(h) != h[num_columns - 1]):
             boost_list.append(h)
             boost_list.append(h)
     dtree_2_train = []

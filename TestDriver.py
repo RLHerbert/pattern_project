@@ -33,8 +33,8 @@ chess_example1 = ['1', 'd', '1', 'f', '3', 'e', '4', '???']
 # this other example should be class 'five'
 chess_example112 = ['112', 'd', '3', 'c', '4', 'c', '1', '???']
 # get the classifications
-print("classification of example 1 from chess dtree is:", chess_dtree.getClassification(chess_example1))
-print("classification of example 122 from chess dtree is:", chess_dtree.getClassification(chess_example112))
+print("classification of example 1 from chess dtree is:", chess_dtree.get_classification(chess_example1))
+print("classification of example 122 from chess dtree is:", chess_dtree.get_classification(chess_example112))
 
 
 # PIE TEST*****************************************:

@@ -30,7 +30,7 @@ class DtreeEnsemble:
         # then create a key with the label it gives for the example
         # store each key (label) with a running total of weights of trees that vote for that label
         for dtree in self.__list_of_dtrees:
-            label = dtree.getClassification(example)
+            label = dtree.get_classification(example)
             if label in vote_weight_dict:
                 vote_weight_dict[label] += dtree.get_voting_weight()
             else:
@@ -87,11 +87,11 @@ def main():
     dtree_ensemble.add_dtree_to_ensemble(dtree2)
 
     print()
-    print("classification of example 1 from dtree1 is:", dtree1.getClassification(chess_example1))
+    print("classification of example 1 from dtree1 is:", dtree1.get_classification(chess_example1))
     #print("classification of example 122 from dtree1 is:", dtree1.getClassification(chess_example112))
 
     print()
-    print("classification of example 1 from dtree2 is:", dtree2.getClassification(chess_example1))
+    print("classification of example 1 from dtree2 is:", dtree2.get_classification(chess_example1))
     #print("classification of example 122 from dtree2 is:", dtree2.getClassification(chess_example112))
 
     print()
