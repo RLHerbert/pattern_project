@@ -43,7 +43,6 @@ def main():
     print("Error rate of Dtree 1 on holdout set:", (1 - accuracy_of_dtree_1_on_holdt) * 100, "%")
     print("Error rate of Dtree 2 on holdout set:", (1 - accuracy_of_dtree_2_on_holdt) * 100, "%")
 
-    # TODO MAYBE DETERMINE BETTER WAY TO DO VOTING WEIGHTS? idk... He just says "voting weights based on accuracies"
     # setting the voting weights as the accuracies for now
     dtree_1.set_voting_weight(accuracy_of_dtree_1_on_holdt)
     dtree_2.set_voting_weight(accuracy_of_dtree_2_on_holdt)

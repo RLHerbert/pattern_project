@@ -8,5 +8,17 @@ Sophanna - buildTree, divide_set_by_attribute()
 
 Melissa - questionNode and leafNode classes, getClassification()
 
+---
 
-Unassigned To Dos - weighting/voting of DTrees
+Dennis - weighting/voting of DTrees
+
+---
+
+Dennis - organization/comments/standardized style/naming conventions/etc.
+
+Rowan - return training set of dTree2 and misclassified set, print misclassified holdout vectors
+
+Sophanna - README.txt, tell prof to pipe output to a file instead of console
+	"python main.py > output.txt"
+
+Melissa - print training, holdout, and validation sets for dtree_1 AND dtree_2; clean up file tree, zip file and send
