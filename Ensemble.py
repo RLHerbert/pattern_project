@@ -17,13 +17,27 @@ from second_tree import from_misclassified
 
 class DtreeEnsemble:
     def __init__(self):
+        """
+        Constructor for DtreeEnsemble. Creates a list of trees that will hold all the trees in
+        the ensemble
+        """
         # list of trees
         self.__list_of_dtrees = []
 
     def add_dtree_to_ensemble(self, dtree_to_add):
+        """
+        Function that adds a given tree to the ensemble
+        :param dtree_to_add: the dtree to be added to the ensemble
+        :return:
+        """
         self.__list_of_dtrees.append(dtree_to_add)
 
     def get_voting_results(self, example):
+        """
+        Returns a label for a given example base on voting of the dtrees
+        :param example: the example to classify
+        :return: the label of the example that the ensemble assigns
+        """
         vote_weight_dict = {}
 
         # go through each d tree and ask it to classify the example.
@@ -47,6 +61,11 @@ class DtreeEnsemble:
         return label_with_max_vote_weight
 
     def get_accuracy(self, dataset):
+        """
+        Calculates the accuracy of the dtree ensemble
+        :param dataset: the testing set
+        :return: the accuracy of the ensemble
+        """
         correct = 0
         for example in dataset:
             if example[len(dataset[0]) - 1] == self.get_voting_results(example):
