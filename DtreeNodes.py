@@ -33,14 +33,14 @@ class questionNode:
 		print("Best attribute to split on:", columns_enum(self.best_attribute_data[0]).name, "\n")
 		print("Attribute value entropies:")
 		for attribute_value_tuple in self.best_attribute_data[1]:
-			print(columns_enum(attribute_value_tuple[0]).name, attribute_value_tuple[1],
+			print("H(" + columns_enum(attribute_value_tuple[0]).name, "=", attribute_value_tuple[1] + ") =",
 				  self.best_attribute_data[1][attribute_value_tuple])
 		print()
 		print("Attribute entropies:")
 		for attribute in self.best_attribute_data[2]:
-			print(columns_enum(attribute).name, self.best_attribute_data[2][attribute])
+			print("H(T,", columns_enum(attribute).name + ") =", self.best_attribute_data[2][attribute])
 		print()
 		print("Attribute information gains:")
 		for attribute in self.best_attribute_data[3]:
-			print(columns_enum(attribute).name, self.best_attribute_data[3][attribute])
+			print("I(T,", columns_enum(attribute).name + ") =", self.best_attribute_data[3][attribute])
 		print()
