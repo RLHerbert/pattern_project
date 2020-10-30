@@ -12,10 +12,11 @@ class leafNode:
 class questionNode:
 	"""questionNode description"""
 
-	def __init__(self, attribute_data):
+	def __init__(self, attribute_data, most_common_label):
 		self.best_attribute_data = attribute_data
 		self.attribute = attribute_data[0]
 		self.children = {}
+		self.most_common_label_from_dataset = most_common_label
 
 	def addChild(self, value, childNode):
 		self.children[value] = childNode

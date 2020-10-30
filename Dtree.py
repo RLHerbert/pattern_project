@@ -8,7 +8,6 @@ class Dtree:
     def __init__(self, dataset, columns_enum):
         self.__root = self.__build_tree(dataset)
         self.__columns_enum = columns_enum
-        self.__list_possible_labels = self.__get_possible_labels_from_data(dataset)
         # set default voting weight
         self.__voting_weight = 1
 
@@ -57,9 +56,8 @@ class Dtree:
             if value in node.children:
                 return self.__getClassification(node.getChild(value), example)
             else:
-                # we have a missing edge, need to give a random class
-                random_index = random.randint(0, len(self.__list_possible_labels) - 1)
-                return self.__list_possible_labels[random_index]
+                # we have a missing edge, give the most common label that reached the node
+                return node.most_common_label_from_dataset
 
     def __output_q_node_data(self, node, parent, value):
         if isinstance(node, leafNode):
@@ -128,13 +126,6 @@ class Dtree:
         print("Leaf node's parent attribute:", self.__columns_enum(parent.attribute).name)
         print("Leaf node's parent value:", value)
         print("Leaf node's label:", node.getLabel())
-
-    def __get_possible_labels_from_data(self, dataset):
-        set_of_possible_classes = set()
-        num_columns = len(dataset[0])
-        for example in dataset:
-            set_of_possible_classes.add(example[num_columns - 1])
-        return list(set_of_possible_classes)
 
     def __find_best_attribute(self, dataset):
         num_columns = len(dataset[0])
@@ -247,9 +238,10 @@ class Dtree:
         list_of_subsets = []
         # find the best attribute for current data subset
         best_attribute_data = self.__find_best_attribute(dataset)
-
+        # get most common class from dataset
+        most_common_label = self.__get_most_common_label(dataset)
         # create question node using the best attribute
-        q_node = questionNode(best_attribute_data)
+        q_node = questionNode(best_attribute_data, most_common_label)
         # divide dataset into subsets i.e shape, fillling size
         list_of_subsets = self.__divide_set_by_attribute(best_attribute_data[0], dataset)
 
@@ -294,6 +286,23 @@ class Dtree:
             if subset[i][num_columns - 1] != this_class:
                 return False
         return True
+
+    def __get_most_common_label(self, dataset):
+        label_dict = {}
+        num_columns = len(dataset[0])
+        for example in dataset:
+            label = example[num_columns - 1]
+            if label in label_dict:
+                label_dict[label] += 1
+            else:
+                label_dict[label] = 1
+        most_common_label = random.choice(list(label_dict))
+        for label in label_dict:
+            if label_dict[label] > label_dict[most_common_label]:
+                # found a new max
+                most_common_label = label
+
+        return most_common_label
 
     # return subsets of each attribute
     # shape: return cirlce, square, triangle
