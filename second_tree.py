@@ -6,12 +6,13 @@ import random
 
 def from_misclassified(tree_dict, dtree):
     boost_list = tree_dict["train"] + tree_dict["holdt"]
+    num_columns = len(boost_list[0])
     for h in tree_dict["holdt"]:
-        if (dtree.getClassification(h) != h[7]):
+        if (dtree.getClassification(h) != h[num_columns - 1]):
             boost_list.append(h)
             boost_list.append(h)
     dtree_2_train = []
-    for _ in range(0, 132):
+    for _ in range(0, len(tree_dict["train"])):
         dtree_2_train.append(boost_list[random.randint(0, len(boost_list))-1])
     # print(len(dtree_2_train))
     return Dtree(dtree_2_train, dtree.get_enum())
