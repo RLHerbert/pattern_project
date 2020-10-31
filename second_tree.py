@@ -15,16 +15,23 @@ import random
 
 def from_misclassified(tree_dict, dtree):
     boost_list = tree_dict["train"] + tree_dict["holdt"]
+    misclassified = []
     num_columns = len(boost_list[0])
     for h in tree_dict["holdt"]:
         if (dtree.get_classification(h) != h[num_columns - 1]):
+            misclassified.append(h)
             boost_list.append(h)
             boost_list.append(h)
     dtree_2_train = []
     for _ in range(0, len(tree_dict["train"])):
         dtree_2_train.append(boost_list[random.randint(0, len(boost_list))-1])
     # print(len(dtree_2_train))
-    return Dtree(dtree_2_train, dtree.get_enum())
+    dtree_2_dict = {
+        "dtree": Dtree(dtree_2_train, dtree.get_enum()),
+        "train": dtree_2_train,
+        "miscl": misclassified
+    }
+    return dtree_2_dict
 
 
 def main():
@@ -44,6 +51,7 @@ def main():
     print("Accuracy of dtree1:", dtree1.get_accuracy(tree_dict["holdt"]))
     dtree2 = from_misclassified(tree_dict, dtree1)
     print("Accuracy of dtree2:", dtree2.get_accuracy(tree_dict["holdt"]))
+
 
 if __name__ == "__main__":
     main()
