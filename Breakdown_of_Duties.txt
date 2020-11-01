@@ -1,18 +1,40 @@
 Breakdown of Duties
 
+
+--- General ---
+
+Dennis - Dtree expert and development lead; in charge of preparation, planning, and flow of development; general coder and debugger
+
+Rowan - Data lead; in charge of ensuring the inputs and outputs of the program are correct; general coder
+
+Sophanna - Documentation lead; in charge of writing, compiling, and organizing associated documents; general coder
+
+Melissa - Communications lead; point of contact with professor and team; in charge of the division of duties; general coder
+
+
+--- Phase 1 --- Project Planning and Initial Development ---
+
 Dennis - Preparation/planning, find_best_attribute()
 
 Rowan - Dataset parsing/boosting, output formatting, other I/O stuff
 
 Sophanna - buildTree, divide_set_by_attribute()
 
-Melissa - questionNode and leafNode classes, getClassification()
+Melissa - questionNode and leafNode classes, getClassification(), setting up a system for the standup emails
 
----
 
-Dennis - weighting/voting of DTrees
+--- Phase 2 --- Main Development ---
 
----
+Dennis - Weighting/voting of DTrees
+
+Rowan - Continuing previous programming tasks; debugging
+
+Sophanna - Continuing previous programming tasks; debugging
+
+Melissa - Continuing previous programming task; debugging
+
+
+--- Phase 3 ---  
 
 Dennis - organization/comments/standardized style/naming conventions/etc.
 

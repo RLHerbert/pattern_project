@@ -29,32 +29,53 @@ class CHESS_COLUMNS(Enum):
 def main():
     # parse the data
     tree_data_dictionary = parse.run()
-    # TODO: PRINT TRAINING, HOLDT, AND VALID SET FOR dtree_1 AND dtree_2
 
     # create the first tree
     dtree_1 = Dtree(tree_data_dictionary["train"], CHESS_COLUMNS)
+    # create the second tree
+    dtree_2_dict = from_misclassified(tree_data_dictionary, dtree_1)
+
+    # print training, holdout, and validation sets for dtree_1
+    print("********************************START OF DTREE 1 DATASET DETAILS********************************")
+    print("Training set:")
+    print(elem) for elem in tree_data_dictionary["train"]
+    print("Holdout set:")
+    print(elem) for elem in tree_data_dictionary["holdt"]
+    print("Validation set:")
+    print(elem) for elem in tree_data_dictionary["valid"]
+    print("********************************END OF DTREE 1 DATASET DETAILS********************************")
+
+    # print training, holdout, and validation sets for dtree_2
+    print("********************************START OF DTREE 2 DATASET DETAILS********************************")
+    print("Training set:")
+    print(elem) for elem in dtree_2_dict["train"]
+    print("Holdout set: (same as Dtree 1)")
+    print(elem) for elem in tree_data_dictionary["holdt"]
+    print("Validation set: (same as Dtree 1)")
+    print(elem) for elem in tree_data_dictionary["valid"]
+    print("********************************END OF DTREE 2 DATASET DETAILS********************************")
+
     print("********************************START OF DTREE 1 CONSTRUCTION DETAILS********************************")
     dtree_1.output_everything()
     print("*********************************END OF DTREE 1 CONSTRUCTION DETAILS*********************************")
 
     print()
 
-    # create the second tree
-    dtree_2_dict = from_misclassified(tree_data_dictionary, dtree_1)
-    print("********************************DTREE 1 MISCLASSIFIED********************************")
-    print(dtree_2_dict["miscl"])
-    print()
-    print("********************************DTREE 2 TRAINING SET********************************")
-    print(dtree_2_dict["train"])
-    print()
     dtree_2 = dtree_2_dict["dtree"]
     print("********************************START OF DTREE 2 CONSTRUCTION DETAILS********************************")
     dtree_2.output_parents()
     print("*********************************END OF DTREE 2 CONSTRUCTION DETAILS*********************************")
 
     print()
-    # TODO PRINT MISCLASSIFIED HOLDOUT VECTORS
 
+    # print misclassified holdout vectors for the first tree
+    print("********************************START OF DTREE 1 MISCLASSIFIED********************************")
+    print(elem) for elem in dtree_2_dict["miscl"]
+    print("********************************END OF DTREE 1 MISCLASSIFIED********************************")
+
+    print()
+
+    print("********************************START OF HOLDOUT ACCURACY********************************")
     # printing accuracies based on hold out set
     accuracy_of_dtree_1_on_holdt = dtree_1.get_accuracy(
         tree_data_dictionary["holdt"])
@@ -64,7 +85,11 @@ def main():
           (1 - accuracy_of_dtree_1_on_holdt) * 100, "%")
     print("Error rate of Dtree 2 on holdout set:",
           (1 - accuracy_of_dtree_2_on_holdt) * 100, "%")
+    print("********************************END OF HOLDOUT ACCURACY********************************")
 
+    print()
+
+    print("********************************START OF VOTING WEIGHT********************************")
     # setting the voting weights as the accuracies on original data set
     original_set = tree_data_dictionary["train"] + tree_data_dictionary["holdt"] + tree_data_dictionary["valid"]
     dtree_1.set_voting_weight(dtree_1.get_accuracy(original_set))
@@ -74,7 +99,11 @@ def main():
           dtree_1.get_voting_weight())
     print("Voting weight of Dtree 2 (based on accuracy):",
           dtree_2.get_voting_weight())
+    print("********************************END OF VOTING WEIGHT********************************")
 
+    print()
+
+    print("********************************START OF VALIDATION ACCURACY********************************")
     # create the ensemble
     dtree_ensemble = DtreeEnsemble()
     # add the dtrees to the ensemble
@@ -94,6 +123,8 @@ def main():
           accuracy_of_dtree_1_on_valid * 100, "%")
     print("Accuracy rate of Dtree 2 on validation set:",
           accuracy_of_dtree_2_on_valid * 100, "%")
+
+    print("********************************END OF VALIDATION ACCURACY********************************")
 
 
 if __name__ == "__main__":
