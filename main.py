@@ -65,9 +65,10 @@ def main():
     print("Error rate of Dtree 2 on holdout set:",
           (1 - accuracy_of_dtree_2_on_holdt) * 100, "%")
 
-    # setting the voting weights as the accuracies for now
-    dtree_1.set_voting_weight(accuracy_of_dtree_1_on_holdt)
-    dtree_2.set_voting_weight(accuracy_of_dtree_2_on_holdt)
+    # setting the voting weights as the accuracies on original data set
+    original_set = tree_data_dictionary["train"] + tree_data_dictionary["holdt"] + tree_data_dictionary["valid"]
+    dtree_1.set_voting_weight(dtree_1.get_accuracy(original_set))
+    dtree_2.set_voting_weight(dtree_2.get_accuracy(original_set))
     print()
     print("Voting weight of Dtree 1 (based on accuracy):",
           dtree_1.get_voting_weight())
