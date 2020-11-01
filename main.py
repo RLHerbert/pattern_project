@@ -38,21 +38,27 @@ def main():
     # print training, holdout, and validation sets for dtree_1
     print("********************************START OF DTREE 1 DATASET DETAILS********************************")
     print("Training set:")
-    print(elem) for elem in tree_data_dictionary["train"]
+    for elem in tree_data_dictionary["train"]:
+        print(elem)
     print("Holdout set:")
-    print(elem) for elem in tree_data_dictionary["holdt"]
+    for elem in tree_data_dictionary["holdt"]:
+        print(elem)
     print("Validation set:")
-    print(elem) for elem in tree_data_dictionary["valid"]
+    for elem in tree_data_dictionary["valid"]: 
+        print(elem)
     print("********************************END OF DTREE 1 DATASET DETAILS********************************")
 
     # print training, holdout, and validation sets for dtree_2
     print("********************************START OF DTREE 2 DATASET DETAILS********************************")
     print("Training set:")
-    print(elem) for elem in dtree_2_dict["train"]
+    for elem in dtree_2_dict["train"]:
+        print(elem)
     print("Holdout set: (same as Dtree 1)")
-    print(elem) for elem in tree_data_dictionary["holdt"]
+    for elem in tree_data_dictionary["holdt"]:
+        print(elem) 
     print("Validation set: (same as Dtree 1)")
-    print(elem) for elem in tree_data_dictionary["valid"]
+    for elem in tree_data_dictionary["valid"]:
+        print(elem) 
     print("********************************END OF DTREE 2 DATASET DETAILS********************************")
 
     print("********************************START OF DTREE 1 CONSTRUCTION DETAILS********************************")
@@ -70,7 +76,8 @@ def main():
 
     # print misclassified holdout vectors for the first tree
     print("********************************START OF DTREE 1 MISCLASSIFIED********************************")
-    print(elem) for elem in dtree_2_dict["miscl"]
+    for elem in dtree_2_dict["miscl"]:
+        print(elem) 
     print("********************************END OF DTREE 1 MISCLASSIFIED********************************")
 
     print()
