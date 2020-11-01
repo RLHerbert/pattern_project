@@ -11,15 +11,22 @@ import csv
 import random
 
 
-# Takes the enumeration of the row, a tuple, and places the id inside the list for convenience
 def give_ids(enumerated=[]):
+    """
+    Takes the enumeration of the row, a tuple, and places the id inside the list for convenience
+    :param enumerated:
+    :return: the feature vector with an id
+    """
     row_with_id = enumerated[1]
     row_with_id.insert(0, str(enumerated[0]))
     return row_with_id
 
 
-# Opens the CSV file and parses it into a list of lists
 def parse():
+    """
+    Opens the CSV file and parses it into a list of lists
+    :return: shuffled data set, a list of feature vectors
+    """
     with open('data_set.csv', newline='\n') as data_set:
         # Creates list of lists from CSV
         data_reader = csv.reader(data_set, delimiter=',')
@@ -29,8 +36,11 @@ def parse():
         return shuffled
 
 
-# Splits our data set into a training set, holdout set, and validation set
 def run():
+    """
+    Splits our data set into a training set, holdout set, and validation set
+    :return: a dictionary of the data set split into a training set, holdout set, and validation set
+    """
     shuffled_complete_data_set = parse()
     split_data_sets = {
         # Training data set

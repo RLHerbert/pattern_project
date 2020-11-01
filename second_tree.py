@@ -14,6 +14,13 @@ import random
 
 
 def from_misclassified(tree_dict, dtree):
+    """
+    Function that creates a second dtree
+    :param tree_dict: the dataset split up into train,
+    :param dtree: the first dtree
+    :return: the second dtree, its training set, and the misclassified holdouts of dtree1
+    """
+
     boost_list = tree_dict["train"] + tree_dict["holdt"]
     misclassified = []
     num_columns = len(boost_list[0])
@@ -49,7 +56,7 @@ def main():
     tree_dict = parse.run()
     dtree1 = Dtree(tree_dict["train"], CHESS_COLUMNS)
     print("Accuracy of dtree1:", dtree1.get_accuracy(tree_dict["holdt"]))
-    dtree2 = from_misclassified(tree_dict, dtree1)
+    dtree2 = from_misclassified(tree_dict, dtree1)["dtree"]
     print("Accuracy of dtree2:", dtree2.get_accuracy(tree_dict["holdt"]))
 
 
