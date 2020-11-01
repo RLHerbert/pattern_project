@@ -33,7 +33,7 @@ Sample Invocation:
 - `Python3 main.py`
 
 Features:
-- Boosted Feacture Vectors
+- Boosted Feature Vectors
 - Weighted Voting Using Accuracy Rate
 
 Issues:
