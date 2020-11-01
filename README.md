@@ -4,11 +4,11 @@
 
 **Team Name**: Classy Fires
 
-**Team Members** Members: Sophanna Ek, Melissa Hazlewood Rowan Herbert, Dennis La
+**Team Members**: Sophanna Ek, Melissa Hazlewood Rowan Herbert, Dennis La
 
 Introduction: 
     The automated Ensemble Decision Tree (DTree) Builder was built by using a weighted vote of the two DTrees based on their accuracy. 
-    The first DTree was built with an initial selection of the vectors. The second DTree was built with boosted feature vectors. The same data was used in both DTrees for training, testing and validating. The DTree builder used the standard Shannon-based Entropy and Information Gain mechanisms with a Training Set. This project implemented in Python. 
+    The first DTree was built with an initial selection of the vectors. The second DTree was built with boosted feature vectors. The same data was used in both DTrees for training, testing and validating. The DTree builder used the standard Shannon-based Entropy and Information Gain mechanisms with a Training Set. The boosted feature vectors were built by the union of the first Training set and Holdout Set boosted with two extra mis-classified Holdout vectors. This project implemented in Python. 
 
 File Contents:
 - Dtree.py: Decision tree class includes all neccessary functions to construct the decision tree. 
@@ -34,7 +34,7 @@ Sample Invocation:
 
 Features:
 - Boosted Feacture Vectors
-- Weight Voting Using accuracy rate
+- Weight Voting Using Accuracy Rate
 
 Issues:
 - None so far
