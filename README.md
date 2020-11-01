@@ -30,7 +30,8 @@ Setup and Installation:
 
 
 Sample Invocation: 
-- `Python3 main.py`
+- `python3 main.py`
+- or `ython main.py > output.txt`
 
 Features:
 - Boosted Feature Vectors
