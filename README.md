@@ -12,7 +12,7 @@ Introduction:
 File Contents:
 - Dtree.py: Decision tree class includes all neccessary functions to construct the decision tree. 
 - DtreeNodes: Decision tree data structure includes question and leaf nodes. 
-- Ensemble.py: Decision tree Ensemble class include all neccessary function to construct the decision tree.
+- Ensemble.py: Decision tree Ensemble class include all neccessary function to construct the decision tree Ensemble.
 - parse.py: Data input processing file.
 - second_tree.py: Decision tree #2 construction.
 - main.py: The entry of the application. It prints out all the output for this project. 
