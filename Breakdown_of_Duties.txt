@@ -23,7 +23,7 @@ Sophanna - buildTree, divide_set_by_attribute()
 Melissa - questionNode and leafNode classes, getClassification(), setting up a system for the standup emails
 
 
---- Phase 2 --- Main Development ---
+--- Phase 2 --- Main Development and Debugging ---
 
 Dennis - Weighting/voting of DTrees
 
@@ -34,7 +34,7 @@ Sophanna - Continuing previous programming tasks; debugging
 Melissa - Continuing previous programming task; debugging
 
 
---- Phase 3 ---  
+--- Phase 3 --- Testing, Validation, and Packaging Deliverables ---
 
 Dennis - organization/comments/standardized style/naming conventions/etc.
 
